@@ -1,0 +1,96 @@
+{
+  "fuente": "Reglamento oficial del Truco Argentino — AAT + fuentes canónicas",
+  "fecha_extraccion": "2026-09-12",
+  "descripcion": "Datos de referencia para la implementación del juego de Truco Argentino en C++",
+
+  "palos": ["espada", "basto", "oro", "copa"],
+  "simbolos_palos": {
+    "espada": "♠",
+    "basto": "♣",
+    "oro": "♦",
+    "copa": "♥"
+  },
+  "numeros_validos": [1, 2, 3, 4, 5, 6, 7, 10, 11, 12],
+
+  "jerarquia_pelea": [
+    { "posicion": 1,  "numero": 1,  "palo": "espada", "nombre": "Ancho de espada" },
+    { "posicion": 2,  "numero": 1,  "palo": "basto",  "nombre": "Ancho de basto" },
+    { "posicion": 3,  "numero": 7,  "palo": "espada", "nombre": "Siete bravo de espada" },
+    { "posicion": 4,  "numero": 7,  "palo": "oro",    "nombre": "Siete bravo de oro" },
+    { "posicion": 5,  "numero": 3,  "palo": "cualquiera", "nombre": "Los Tres" },
+    { "posicion": 6,  "numero": 2,  "palo": "cualquiera", "nombre": "Los Dos" },
+    { "posicion": 7,  "numero": 1,  "palo": "oro_o_copa",  "nombre": "Ases falsos" },
+    { "posicion": 8,  "numero": 12, "palo": "cualquiera", "nombre": "Reyes" },
+    { "posicion": 9,  "numero": 11, "palo": "cualquiera", "nombre": "Caballos" },
+    { "posicion": 10, "numero": 10, "palo": "cualquiera", "nombre": "Sotas" },
+    { "posicion": 11, "numero": 7,  "palo": "basto_o_copa", "nombre": "Sietes falsos" },
+    { "posicion": 12, "numero": 6,  "palo": "cualquiera", "nombre": "Los Seis" },
+    { "posicion": 13, "numero": 5,  "palo": "cualquiera", "nombre": "Los Cinco" },
+    { "posicion": 14, "numero": 4,  "palo": "cualquiera", "nombre": "Los Cuatro" }
+  ],
+
+  "envido": {
+    "valor_cartas": {
+      "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7,
+      "10": 0, "11": 0, "12": 0
+    },
+    "base_mismo_palo": 20,
+    "maximo_envido": 33,
+    "minimo_envido": 0,
+    "calculo": "Si hay 2+ cartas del mismo palo: Carta_A + Carta_B + 20. Si no: valor de la carta más alta.",
+    "cantos": [
+      { "nombre": "Envido",       "puntos_quiero": 2, "puntos_no_quiero": 1 },
+      { "nombre": "Real Envido",  "puntos_quiero": 3, "puntos_no_quiero": 1 },
+      { "nombre": "Falta Envido", "puntos_quiero": "lo_que_falta", "puntos_no_quiero": 1 }
+    ],
+    "combinaciones": [
+      { "cadena": ["Envido"],                             "puntos_quiero": 2,  "puntos_no_quiero": 1 },
+      { "cadena": ["Envido", "Envido"],                   "puntos_quiero": 4,  "puntos_no_quiero": 2 },
+      { "cadena": ["Envido", "Real Envido"],              "puntos_quiero": 5,  "puntos_no_quiero": 2 },
+      { "cadena": ["Envido", "Envido", "Real Envido"],    "puntos_quiero": 7,  "puntos_no_quiero": 4 },
+      { "cadena": ["Envido", "Falta Envido"],             "puntos_quiero": "lo_que_falta", "puntos_no_quiero": 2 },
+      { "cadena": ["Envido", "Envido", "Falta Envido"],   "puntos_quiero": "lo_que_falta", "puntos_no_quiero": 4 },
+      { "cadena": ["Real Envido"],                        "puntos_quiero": 3,  "puntos_no_quiero": 1 },
+      { "cadena": ["Falta Envido"],                       "puntos_quiero": "lo_que_falta", "puntos_no_quiero": 1 }
+    ],
+    "timing": "Solo en la primera ronda, antes de que el que lo canta tire su carta"
+  },
+
+  "truco": {
+    "sin_canto_puntos": 1,
+    "cantos": [
+      { "nombre": "Truco",       "puntos_quiero": 2, "puntos_no_quiero": 1 },
+      { "nombre": "Retruco",     "puntos_quiero": 3, "puntos_no_quiero": 2 },
+      { "nombre": "Vale Cuatro", "puntos_quiero": 4, "puntos_no_quiero": 3 }
+    ],
+    "regla_subida": "Solo puede subir la apuesta el jugador que fue desafiado",
+    "timing": "Se puede cantar en cualquier ronda"
+  },
+
+  "flor": {
+    "definicion": "3 cartas del mismo palo",
+    "puntos_simple": 3,
+    "contraflor_puntos_quiero": 6,
+    "contraflor_puntos_no_quiero": 4,
+    "calculo": "Suma de las 3 cartas + 20",
+    "maximo": 38,
+    "minimo": 20,
+    "efecto": "Anula el envido. Si alguien tiene flor, no se puede jugar envido.",
+    "timing": "Primera ronda, antes de jugar carta. Es obligatorio cantarla."
+  },
+
+  "pardas": {
+    "primera_parda": "Define la segunda ronda. Si segunda también empata, define la tercera.",
+    "segunda_parda_con_ganador_primera": "Gana quien ganó la primera ronda.",
+    "tercera_parda": "Gana quien ganó la primera ronda.",
+    "triple_parda": "Gana el jugador que es MANO.",
+    "empate_envido": "Gana el jugador que es MANO.",
+    "empate_flor": "Gana el jugador que es MANO."
+  },
+
+  "mano": {
+    "definicion": "El jugador que tira primero en la primera ronda",
+    "privilegio": "Gana todos los empates (envido, flor, pardas triples)",
+    "rotacion": "Rota después de cada mano jugada. El mano pasa a ser pie y viceversa."
+  }
+}
