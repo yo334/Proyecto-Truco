@@ -1,9 +1,10 @@
-#include "partida.h"
-#include "interfaz.h"
-
 #ifdef _WIN32
 #include <windows.h>
 #endif
+#include "partida.h"
+#include "interfaz.h"
+
+using namespace std;
 
 int main() {
 #ifdef _WIN32

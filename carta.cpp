@@ -1,14 +1,16 @@
 #include "carta.h"
 #include <stdexcept>
 
+using namespace std;
+
 // Constructor, inicializa los atributos de la carta
-Carta::Carta(int numero, std::string palo) : numero(numero), palo(palo) {}
+Carta::Carta(int numero, string palo) : numero(numero), palo(palo) {}
 
 int Carta::obtenerNumero() const {
     return numero;
 }
 
-std::string Carta::obtenerPalo() const {
+string Carta::obtenerPalo() const {
     return palo;
 }
 
@@ -43,30 +45,30 @@ int Carta::obtenerValorEnvido() const {
     return numero;
 }
 
-std::string Carta::obtenerNombrePalo() const {
+string Carta::obtenerNombrePalo() const {
     return palo;
 }
 
-std::string Carta::mostrar() const {
-    return std::to_string(numero) + " de " + palo;
+string Carta::mostrar() const {
+    return to_string(numero) + " de " + palo;
 }
 
 // Devuelve un vector de strings que dibuja la carta.
 // ¡Queda flama en la consola!
-std::vector<std::string> Carta::mostrarASCII() const {
-    std::vector<std::string> lineas(7);
+vector<string> Carta::mostrarASCII() const {
+    vector<string> lineas(7);
     
     // Tratamiento de figuras (Sota, Caballo, Rey)
-    std::string numStr = std::to_string(numero);
+    string numStr = to_string(numero);
     if (numero == 10) numStr = "S";
     else if (numero == 11) numStr = "C";
     else if (numero == 12) numStr = "R";
 
     // Acomodamos el espaciado para que el numerito quede alineado
-    std::string padIzq = (numStr.length() == 1) ? " " : "";
+    string padIzq = (numStr.length() == 1) ? " " : "";
 
     // Centramos el nombre del palo a ojímetro (ancho interior 11)
-    std::string paloCentrado;
+    string paloCentrado;
     if (palo == "Espada") paloCentrado = "  Espada   ";
     else if (palo == "Basto") paloCentrado = "   Basto   ";
     else if (palo == "Oro") paloCentrado = "    Oro    ";
