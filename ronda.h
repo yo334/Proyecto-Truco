@@ -16,16 +16,17 @@ public:
     // Retorna: "jugador", "ia", "parda"
     std::string determinarGanador();
 
-    bool esParda();
     bool estaCompleta(); // true si ambos jugaron
 
-    // Getters para las cartas jugadas
+    // ¿Ya tiró cada uno en esta ronda?
+    bool jugoJugador() const;
+    bool jugoIA() const;
+
+    // Getters para las cartas jugadas (solo si ya tiró)
     Carta obtenerCartaJugador();
     Carta obtenerCartaIA();
 
 private:
     std::optional<Carta> carta_jugador;
     std::optional<Carta> carta_ia;
-    bool jugador_jugo;
-    bool ia_jugo;
 };

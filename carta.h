@@ -22,9 +22,6 @@ public:
     // Retorna el valor numérico para el cálculo del envido (1-7 o 0 para figuras)
     int obtenerValorEnvido() const;
 
-    // Retorna el nombre del palo (alias para obtenerPalo, según requerimiento)
-    std::string obtenerNombrePalo() const;
-
     // Retorna un string formateado, ej: "7 de Espada"
     std::string mostrar() const;
 

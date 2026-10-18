@@ -19,7 +19,4 @@ public:
 
     // Vuelve a generar las 40 cartas y las mezcla para una nueva mano
     void reiniciar();
-
-    // Nos dice cuántas cartas quedan en el mazo
-    int cantidadRestante() const;
 };

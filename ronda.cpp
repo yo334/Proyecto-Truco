@@ -2,16 +2,14 @@
 
 using namespace std;
 
-Ronda::Ronda() : jugador_jugo(false), ia_jugo(false) {}
+Ronda::Ronda() {}
 
 void Ronda::registrarCartaJugador(Carta c) {
   carta_jugador = c;
-  jugador_jugo = true;
 }
 
 void Ronda::registrarCartaIA(Carta c) {
   carta_ia = c;
-  ia_jugo = true;
 }
 
 string Ronda::determinarGanador() {
@@ -30,13 +28,14 @@ string Ronda::determinarGanador() {
   }
 }
 
-bool Ronda::esParda() {
-  if (!estaCompleta())
-    return false;
-  return carta_jugador->obtenerJerarquia() == carta_ia->obtenerJerarquia();
+// optional ya sabe si tiene una carta adentro: no hace falta otro flag
+bool Ronda::estaCompleta() {
+  return carta_jugador.has_value() && carta_ia.has_value();
 }
 
-bool Ronda::estaCompleta() { return jugador_jugo && ia_jugo; }
+bool Ronda::jugoJugador() const { return carta_jugador.has_value(); }
+
+bool Ronda::jugoIA() const { return carta_ia.has_value(); }
 
 Carta Ronda::obtenerCartaJugador() { return *carta_jugador; }
 

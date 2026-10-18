@@ -45,10 +45,6 @@ int Carta::obtenerValorEnvido() const {
     return numero;
 }
 
-string Carta::obtenerNombrePalo() const {
-    return palo;
-}
-
 string Carta::mostrar() const {
     return to_string(numero) + " de " + palo;
 }
@@ -64,9 +60,6 @@ vector<string> Carta::mostrarASCII() const {
     else if (numero == 11) numStr = "C";
     else if (numero == 12) numStr = "R";
 
-    // Acomodamos el espaciado para que el numerito quede alineado
-    string padIzq = (numStr.length() == 1) ? " " : "";
-
     // Centramos el nombre del palo a ojímetro (ancho interior 11)
     string paloCentrado;
     if (palo == "Espada") paloCentrado = "  Espada   ";
@@ -76,11 +69,14 @@ vector<string> Carta::mostrarASCII() const {
     else paloCentrado = "           "; // Por las dudas
 
     lineas[0] = "┌─────────────┐";
-    lineas[1] = "│ " + numStr + "         " + padIzq + "│";
+    // Ancho interior de la carta: 13 caracteres (igual que la fila de arriba).
+    // numStr siempre ocupa 1 caracter (10/11/12 ya son S/C/R), así que:
+    // 1 espacio + número + 11 espacios = 13
+    lineas[1] = "│ " + numStr + string(11, ' ') + "│";
     lineas[2] = "│             │";
     lineas[3] = "│ " + paloCentrado + " │";
     lineas[4] = "│             │";
-    lineas[5] = "│         " + padIzq + numStr + " │";
+    lineas[5] = "│" + string(11, ' ') + numStr + " │"; // 11 + número + 1 = 13
     lineas[6] = "└─────────────┘";
 
     return lineas;

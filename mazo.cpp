@@ -50,8 +50,6 @@ void Mazo::reiniciar() {
   mezclar();
 }
 
-int Mazo::cantidadRestante() const { return static_cast<int>(cartas.size()); }
-
 /*
 
 Acá vemos la clase Mazo en acción.

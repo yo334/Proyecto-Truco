@@ -8,10 +8,14 @@ OBJS = $(SRCS:.cpp=.o)
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
+# -MMD -MP: el compilador anota de qué .h depende cada .o (archivos .d),
+# así si cambiás un .h se recompilan todos los .cpp que lo incluyen.
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -MMD -MP -c $< -o $@
+
+-include $(OBJS:.o=.d)
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS) $(OBJS:.o=.d) $(TARGET) $(TARGET).exe
 
 .PHONY: clean

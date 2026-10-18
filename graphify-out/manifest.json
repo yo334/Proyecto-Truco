@@ -1,0 +1,116 @@
+{
+  "carta.cpp": {
+    "mtime": 1791224653.0,
+    "seen": 1792363595.3487616,
+    "ast_hash": "378029ea841bde6280e333313ec64756",
+    "semantic_hash": "378029ea841bde6280e333313ec64756"
+  },
+  "carta.h": {
+    "mtime": 1791221990.9995463,
+    "seen": 1792363595.3487663,
+    "ast_hash": "04d26b82c18aa64d077a46be4a89f686",
+    "semantic_hash": "04d26b82c18aa64d077a46be4a89f686"
+  },
+  "datos/reglas_truco.json": {
+    "mtime": 1789253428.2026732,
+    "seen": 1792363595.3487685,
+    "ast_hash": "32f06afcb5287ecc38e6bf638e2388d8",
+    "semantic_hash": "32f06afcb5287ecc38e6bf638e2388d8"
+  },
+  "ia.cpp": {
+    "mtime": 1792077247.7969036,
+    "seen": 1792363595.3487692,
+    "ast_hash": "e3288b38bd0156866dc2733602d8189a",
+    "semantic_hash": "e3288b38bd0156866dc2733602d8189a"
+  },
+  "ia.h": {
+    "mtime": 1791227799.6445677,
+    "seen": 1792363595.3487706,
+    "ast_hash": "4234bf2f9bb4eb4be79b35138926b3b3",
+    "semantic_hash": "4234bf2f9bb4eb4be79b35138926b3b3"
+  },
+  "interfaz.cpp": {
+    "mtime": 1791224653.0,
+    "seen": 1792363595.3487713,
+    "ast_hash": "ac3a5cd72d91e29b764a6d0bf9a16c66",
+    "semantic_hash": "ac3a5cd72d91e29b764a6d0bf9a16c66"
+  },
+  "interfaz.h": {
+    "mtime": 1791221991.0471144,
+    "seen": 1792363595.3487723,
+    "ast_hash": "0d2ff292ebafa613c67a823b7f6b912f",
+    "semantic_hash": "0d2ff292ebafa613c67a823b7f6b912f"
+  },
+  "jugador.cpp": {
+    "mtime": 1792077269.4969554,
+    "seen": 1792363595.348773,
+    "ast_hash": "f634ec30ec907e8dcd57fafff78a84d7",
+    "semantic_hash": "f634ec30ec907e8dcd57fafff78a84d7"
+  },
+  "jugador.h": {
+    "mtime": 1791224401.7750015,
+    "seen": 1792363595.348774,
+    "ast_hash": "492544e23c04a9ad8e5298b100467144",
+    "semantic_hash": "492544e23c04a9ad8e5298b100467144"
+  },
+  "main.cpp": {
+    "mtime": 1791224653.0,
+    "seen": 1792363595.3487747,
+    "ast_hash": "6367523be64ab8ccc616b0509713989e",
+    "semantic_hash": "6367523be64ab8ccc616b0509713989e"
+  },
+  "mazo.cpp": {
+    "mtime": 1791224653.0,
+    "seen": 1792363595.3487754,
+    "ast_hash": "becc225467d9a6d03f1406973687144d",
+    "semantic_hash": "becc225467d9a6d03f1406973687144d"
+  },
+  "mazo.h": {
+    "mtime": 1791221991.0357795,
+    "seen": 1792363595.3487763,
+    "ast_hash": "fda86117a90d381b0dce213782c9698c",
+    "semantic_hash": "fda86117a90d381b0dce213782c9698c"
+  },
+  "mensajes.cpp": {
+    "mtime": 1791224653.0,
+    "seen": 1792363595.3487775,
+    "ast_hash": "0b0481690381b1df06daf657e340562f",
+    "semantic_hash": "0b0481690381b1df06daf657e340562f"
+  },
+  "mensajes.h": {
+    "mtime": 1791221973.609445,
+    "seen": 1792363595.348778,
+    "ast_hash": "dc3bf1371fe01587db8b83ee72e086fe",
+    "semantic_hash": "dc3bf1371fe01587db8b83ee72e086fe"
+  },
+  "partida.cpp": {
+    "mtime": 1792077194.0323882,
+    "seen": 1792363595.348779,
+    "ast_hash": "c7a6e7ffa6b8d7d8d51f449c14363268",
+    "semantic_hash": "c7a6e7ffa6b8d7d8d51f449c14363268"
+  },
+  "partida.h": {
+    "mtime": 1791226875.7059026,
+    "seen": 1792363595.3487797,
+    "ast_hash": "df7226ef1562999c107145208ce0663d",
+    "semantic_hash": "df7226ef1562999c107145208ce0663d"
+  },
+  "pruebas.cpp": {
+    "mtime": 1791227820.3202522,
+    "seen": 1792363595.3487806,
+    "ast_hash": "ade61d569ca11f75442e7d60fc84c688",
+    "semantic_hash": "ade61d569ca11f75442e7d60fc84c688"
+  },
+  "ronda.cpp": {
+    "mtime": 1791224653.0,
+    "seen": 1792363595.3487813,
+    "ast_hash": "98fce5f37bf761e411bfa2a41687d0c6",
+    "semantic_hash": "98fce5f37bf761e411bfa2a41687d0c6"
+  },
+  "ronda.h": {
+    "mtime": 1791224401.7867692,
+    "seen": 1792363595.348782,
+    "ast_hash": "dd55f1d8a06b8b4765e86d9b3b812b72",
+    "semantic_hash": "dd55f1d8a06b8b4765e86d9b3b812b72"
+  }
+}

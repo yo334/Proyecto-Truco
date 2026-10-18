@@ -6,13 +6,6 @@
 
 using namespace std;
 
-void Interfaz::mostrarCarta(const Carta &carta) {
-  auto lineas = carta.mostrarASCII();
-  for (const auto &linea : lineas) {
-    cout << linea << "\n";
-  }
-}
-
 void Interfaz::mostrarCartasHorizontal(const vector<Carta> &cartas) {
   if (cartas.empty())
     return;
@@ -50,14 +43,15 @@ void Interfaz::mostrarTablero(const string &nombre_jugador, int pts_jugador,
     return barra;
   };
 
-  cout << "+----------------------------------+\n";
-  cout << "|  PUNTAJE                         |\n";
+  cout << "+------------------------------------+\n";
+  // Ancho interior: 36 (2 + nombre 10 + ": " + barra 14 + " " + "pp/oo" + 2)
+  cout << "|  PUNTAJE                           |\n";
   cout << "|  " << left << setw(10) << nombre_jugador << ": "
        << generarBarra(pts_jugador) << " " << setw(2) << pts_jugador << "/"
        << objetivo << "  |\n";
   cout << "|  " << left << setw(10) << nombre_ia << ": " << generarBarra(pts_ia)
        << " " << setw(2) << pts_ia << "/" << objetivo << "  |\n";
-  cout << "+----------------------------------+\n";
+  cout << "+------------------------------------+\n";
 }
 
 void Interfaz::mostrarEstadoMano(const vector<Carta> &mano_jugador,
@@ -78,12 +72,6 @@ void Interfaz::mostrarEstadoMano(const vector<Carta> &mano_jugador,
     }
   }
   cout << "-------------------------\n";
-}
-
-void Interfaz::mostrarMensaje(const string &mensaje) {
-  cout << "\n************************************\n";
-  cout << "  " << mensaje << "\n";
-  cout << "************************************\n\n";
 }
 
 int Interfaz::pedirOpcion(const vector<string> &opciones) {
@@ -128,16 +116,6 @@ void Interfaz::mostrarBanner() {
        << "    | |   |  _  / | |  | || |     | |  | |\n"
        << "    | |   | | \\ \\ | |__| || |____ | |__| |\n"
        << "    |_|   |_|  \\_\\ \\____/  \\_____| \\____/ \n\n";
-}
-
-void Interfaz::mostrarCartaBocaAbajo() {
-  cout << "+-------------+\n";
-  cout << "| ########### |\n";
-  cout << "| ########### |\n";
-  cout << "| ########### |\n";
-  cout << "| ########### |\n";
-  cout << "| ########### |\n";
-  cout << "+-------------+\n";
 }
 
 /*
