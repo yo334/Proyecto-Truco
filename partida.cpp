@@ -452,14 +452,21 @@ string Partida::resolverTruco(const string &origen) {
     string respuesta; // "quiero", "no_quiero", "subir", "mazo" o un envido
 
     if (responde == "ia") {
-      // El envido está primero: con buen tanto, la IA canta envido antes
+      // El envido está primero: con flor o buen tanto, la IA canta antes
       if (envidoEstaPrimero("ia")) {
-        string canto = ia.decidirCantoEnvido(armarContextoIA());
-        if (canto != "nada") {
+        if (puedeCantarFlor("ia")) {
           cout << "La IA dice: ¡El envido está primero!\n";
-          if (sumarYVerSiTermino(resolverEnvido("ia", canto)))
+          if (sumarYVerSiTermino(resolverFlor("ia")))
             return "fin_partida";
           cout << "\nSeguimos con el " << cantos[nuevo_nivel] << ":\n";
+        } else {
+          string canto = ia.decidirCantoEnvido(armarContextoIA());
+          if (canto != "nada") {
+            cout << "La IA dice: ¡El envido está primero!\n";
+            if (sumarYVerSiTermino(resolverEnvido("ia", canto)))
+              return "fin_partida";
+            cout << "\nSeguimos con el " << cantos[nuevo_nivel] << ":\n";
+          }
         }
       }
       respuesta = ia.responderTruco(nuevo_nivel, armarContextoIA());
@@ -471,19 +478,27 @@ string Partida::resolverTruco(const string &origen) {
       vector<string> opciones = {"Quiero", "No quiero"};
       if (nuevo_nivel < 3)
         opciones.push_back("Quiero y " + cantos[nuevo_nivel + 1]);
-      // El envido está primero: podés contestar el truco con un envido
-      if (envidoEstaPrimero("jugador"))
+      // El envido está primero: podés contestar el truco con un envido o flor
+      if (envidoEstaPrimero("jugador")) {
+        if (puedeCantarFlor("jugador"))
+          opciones.push_back("Cantar Flor (el envido está primero)");
         for (const auto &c : cantosEnvidoPosibles({}))
           opciones.push_back("Cantar " + c + " (el envido está primero)");
+      }
       opciones.push_back("Irme al mazo");
       string elegida = opciones[Interfaz::pedirOpcion(opciones)];
 
       if (elegida.find("el envido está primero") != string::npos) {
-        // "Cantar Real Envido (el envido...)" -> "Real Envido"
-        string canto = elegida.substr(string("Cantar ").size());
-        canto = canto.substr(0, canto.find(" ("));
-        if (sumarYVerSiTermino(resolverEnvido("jugador", canto)))
-          return "fin_partida";
+        if (elegida.find("Flor") != string::npos) {
+          if (sumarYVerSiTermino(resolverFlor("jugador")))
+            return "fin_partida";
+        } else {
+          // "Cantar Real Envido (el envido...)" -> "Real Envido"
+          string canto = elegida.substr(string("Cantar ").size());
+          canto = canto.substr(0, canto.find(" ("));
+          if (sumarYVerSiTermino(resolverEnvido("jugador", canto)))
+            return "fin_partida";
+        }
         cout << "\nSeguimos con el " << cantos[nuevo_nivel] << ":\n";
         anunciar = false; // no repetir el canto, solo volver a preguntar
         continue;
@@ -521,14 +536,10 @@ string Partida::resolverTruco(const string &origen) {
 // 1. Es la 1ra ronda (estado.resultados_rondas está vacío).
 // 2. El envido no fue cerrado previamente (nadie lo jugó ni se fue al mazo).
 // 3. Es el primer nivel de truco ofrecido (nadie lo quiso todavía, estado.nivel_truco == 0).
-// 4. Quien contesta aún no tiró su carta a la mesa en esta ronda.
 bool Partida::envidoEstaPrimero(const string &responde) {
-  if (!estado.resultados_rondas.empty() || estado.envido_cerrado ||
-      estado.nivel_truco != 0)
-    return false;
-  if (responde == "jugador")
-    return !estado.ronda_actual.jugoJugador();
-  return !estado.ronda_actual.jugoIA();
+  (void)responde;
+  return estado.resultados_rondas.empty() && !estado.envido_cerrado &&
+         estado.nivel_truco == 0;
 }
 
 // Puntos que vale la mano según el truco ya querido (1 si no se cantó).
