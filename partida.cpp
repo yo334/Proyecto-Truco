@@ -258,16 +258,16 @@ string Partida::ganadorDeLaMano(const vector<string> &resultados,
 pair<int, int> Partida::compararEnvido(int pts) {
   int tanto_jugador = jugador.calcularEnvido();
   int tanto_ia = ia.calcularEnvido();
-  cout << "Tu tanto: " << tanto_jugador << "\n";
-  cout << "Tanto IA: " << tanto_ia << "\n";
+  cout << "Tu tanto: -" << tanto_jugador << "-\n";
+  cout << "Tanto IA: -" << tanto_ia << "-\n";
 
   bool gana_jugador = tanto_jugador > tanto_ia ||
                       (tanto_jugador == tanto_ia && turno_es_mano_jugador);
   if (gana_jugador) {
-    cout << "Ganaste el envido (+" << pts << ").\n";
+    cout << ">> Ganaste el envido (+" << pts << ") <<\n";
     return {pts, 0};
   }
-  cout << "La IA ganó el envido (+" << pts << ").\n";
+  cout << ">> La IA ganó el envido (+" << pts << ") <<\n";
   return {0, pts};
 }
 
@@ -288,7 +288,7 @@ pair<int, int> Partida::resolverEnvido(const string &quien_canta,
   while (true) {
     const string ultimo = estado.cadena_envido.back();
     if (canta == "jugador")
-      cout << "Cantaste: " << ultimo << "\n";
+      cout << ">> Cantaste: " << ultimo << " <<\n";
     else
       anunciarCantoIA(ultimo);
 
@@ -329,8 +329,11 @@ pair<int, int> Partida::resolverEnvido(const string &quien_canta,
       if (responde == "ia")
         cout << "La IA dice: " << Mensajes::obtenerPique("rechazo") << "\n";
       int pts = puntosEnvido(estado.cadena_envido, false, falta);
-      if (canta == "jugador")
+      if (canta == "jugador") {
+        cout << ">> Ganaste el envido (+" << pts << ") <<\n";
         return {pts, 0};
+      }
+      cout << ">> La IA ganó el envido (+" << pts << ") <<\n";
       return {0, pts};
     }
     if (respuesta == "Flor") {
@@ -365,7 +368,7 @@ pair<int, int> Partida::resolverFlor(const string &quien_canta) {
   estado.envido_cerrado = true;
 
   if (quien_canta == "jugador")
-    cout << "Cantaste: Flor\n";
+    cout << ">> Cantaste: Flor <<\n";
   else
     anunciarCantoIA("Flor");
 
@@ -385,7 +388,7 @@ pair<int, int> Partida::resolverFlor(const string &quien_canta) {
   if (responde == "jugador") {
     contraflor = Interfaz::pedirOpcion({"Cantar Contraflor", "Me achico"}) == 0;
     if (contraflor)
-      cout << "Cantaste: Contraflor\n";
+      cout << ">> Cantaste: Contraflor <<\n";
   } else {
     contraflor = ia.decidirContraflor(armarContextoIA());
     if (contraflor)
@@ -403,15 +406,15 @@ pair<int, int> Partida::resolverFlor(const string &quien_canta) {
   // Contraflor: 20 + las 3 cartas (figuras valen 0). Empate: gana el mano.
   int flor_jugador = jugador.calcularFlor();
   int flor_ia = ia.calcularFlor();
-  cout << "Tu flor: " << flor_jugador << "\n";
-  cout << "Flor IA: " << flor_ia << "\n";
+  cout << "Tu flor: -" << flor_jugador << "-\n";
+  cout << "Flor IA: -" << flor_ia << "-\n";
   bool gana_jugador = flor_jugador > flor_ia ||
                       (flor_jugador == flor_ia && turno_es_mano_jugador);
   if (gana_jugador) {
-    cout << "Ganaste la contraflor (+6).\n";
+    cout << ">> Ganaste la contraflor (+6) <<\n";
     return {6, 0};
   }
-  cout << "La IA ganó la contraflor (+6).\n";
+  cout << ">> La IA ganó la contraflor (+6) <<\n";
   return {0, 6};
 }
 
@@ -439,7 +442,7 @@ string Partida::resolverTruco(const string &origen) {
     int nuevo_nivel = estado.nivel_truco + 1;
     if (anunciar) {
       if (canta == "jugador")
-        cout << "Cantaste: " << cantos[nuevo_nivel] << "\n";
+        cout << ">> Cantaste: " << cantos[nuevo_nivel] << " <<\n";
       else
         anunciarCantoIA(cantos[nuevo_nivel]);
     }
