@@ -111,18 +111,18 @@ void Partida::jugarMano() {
   if (resultado == "jugador") {
     int pts = puntosTrucoActual();
     jugador.sumarPuntos(pts);
-    cout << "\nGanaste la mano (+" << pts << ").\n";
+    cout << "\n>> Ganaste la mano (+" << pts << ") <<\n";
   } else if (resultado == "ia") {
     int pts = puntosTrucoActual();
     ia.sumarPuntos(pts);
-    cout << "\nLa IA ganó la mano (+" << pts << ").\n";
+    cout << "\n>> La IA ganó la mano (+" << pts << ") <<\n";
   } else if (resultado == "mazo_jugador") {
     int pts = puntosTrucoActual();
     // Irse al mazo antes de que se juegue el envido le regala 1 punto más
     if (!estado.envido_cerrado)
       pts += 1;
     ia.sumarPuntos(pts);
-    cout << "\nTe fuiste al mazo. La IA suma " << pts << ".\n";
+    cout << "\n>> Te fuiste al mazo. La IA suma " << pts << " <<\n";
   }
   if (resultado != "")
     Interfaz::pausar();
@@ -632,8 +632,8 @@ string Partida::turnoJugador(int ronda) {
   while (true) {
     vector<string> historial = historialRondas();
     if (estado.ronda_actual.jugoIA())
-      cout << "\nEn la mesa: la IA tiró "
-           << estado.ronda_actual.obtenerCartaIA().mostrar() << "\n";
+      cout << "\n>> En la mesa: la IA tiró "
+           << estado.ronda_actual.obtenerCartaIA().mostrar() << " <<\n";
     Interfaz::mostrarEstadoMano(jugador.obtenerMano(),
                                 ia.cantidadCartasEnMano(), historial);
 
@@ -682,9 +682,17 @@ string Partida::turnoJugador(int ronda) {
     vector<string> opc_cartas;
     for (const auto &c : jugador.obtenerMano())
       opc_cartas.push_back(c.mostrar());
-    Carta c_j = jugador.jugarCarta(Interfaz::pedirOpcion(opc_cartas));
+    opc_cartas.push_back("Volver atrás");
+
+    int eleccion = Interfaz::pedirOpcion(opc_cartas);
+    if (eleccion == static_cast<int>(opc_cartas.size()) - 1) {
+      // Regresa al menú de acciones sin tirar carta
+      continue;
+    }
+
+    Carta c_j = jugador.jugarCarta(eleccion);
     estado.ronda_actual.registrarCartaJugador(c_j);
-    cout << "Jugaste: " << c_j.mostrar() << "\n";
+    cout << ">> Jugaste: " << c_j.mostrar() << " <<\n";
     return "";
   }
 }
@@ -714,7 +722,7 @@ string Partida::turnoIA(int ronda) {
 
   Carta c_i = ia.jugarCarta(ia.elegirCarta(armarContextoIA()));
   estado.ronda_actual.registrarCartaIA(c_i);
-  cout << "IA jugó: " << c_i.mostrar() << "\n";
+  cout << ">> IA jugó: " << c_i.mostrar() << " <<\n";
   return "";
 }
 
@@ -755,15 +763,15 @@ string Partida::jugarRondas() {
     string gan_ronda = estado.ronda_actual.determinarGanador();
     estado.resultados_rondas.push_back(gan_ronda);
     if (gan_ronda == "jugador") {
-      cout << "Ganaste la ronda.\n";
+      cout << ">> Ganaste la ronda <<\n";
       cout << "La IA dice: " << Mensajes::obtenerPique("perdi_ronda") << "\n";
       turno_actual_jugador = true;
     } else if (gan_ronda == "ia") {
-      cout << "La IA ganó la ronda.\n";
+      cout << ">> La IA ganó la ronda <<\n";
       cout << "La IA dice: " << Mensajes::obtenerPique("gano_ronda") << "\n";
       turno_actual_jugador = false;
     } else {
-      cout << "¡Parda!\n";
+      cout << ">> ¡Parda! <<\n";
       turno_actual_jugador = turno_es_mano_jugador;
     }
 
